@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BD06F1B31CBCF25B00EBA7F6"
+               BuildableName = "GoodCompany.app"
+               BlueprintName = "GoodCompany"
+               ReferencedContainer = "container:GoodCompany.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -12,7 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BD06F1CA1CBCF25B00EBA7F6"
+               BuildableName = "GoodCompanyTests.xctest"
+               BlueprintName = "GoodCompanyTests"
+               ReferencedContainer = "container:GoodCompany.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BD06F1D51CBCF25B00EBA7F6"
+               BuildableName = "GoodCompanyUITests.xctest"
+               BlueprintName = "GoodCompanyUITests"
+               ReferencedContainer = "container:GoodCompany.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BD06F1B31CBCF25B00EBA7F6"
+            BuildableName = "GoodCompany.app"
+            BlueprintName = "GoodCompany"
+            ReferencedContainer = "container:GoodCompany.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -26,6 +71,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BD06F1B31CBCF25B00EBA7F6"
+            BuildableName = "GoodCompany.app"
+            BlueprintName = "GoodCompany"
+            ReferencedContainer = "container:GoodCompany.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -35,6 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BD06F1B31CBCF25B00EBA7F6"
+            BuildableName = "GoodCompany.app"
+            BlueprintName = "GoodCompany"
+            ReferencedContainer = "container:GoodCompany.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
