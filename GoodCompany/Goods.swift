@@ -1,19 +1,26 @@
-
 //
 //  Goods.swift
 //  GoodCompany
 //
-//  Created by 段磊 on 16/4/12.
+//  Created by 段磊 on 16/6/23.
 //  Copyright © 2016年 段磊. All rights reserved.
 //
 
+
+
 import Foundation
+import ObjectMapper
 
-struct Goods {
-
-    let id: Int
-    let goodsName: String
-    let price: String
-    let pics: [Pic]
+class Goods: Mappable {
     
+    var data: [Good]?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        data <- map["data"]
+    }
+
 }

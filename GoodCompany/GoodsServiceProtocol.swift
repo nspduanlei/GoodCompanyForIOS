@@ -7,12 +7,12 @@
 //
 
 import Foundation
-
+import Alamofire
 //闭包，用于处理请求的返回
-typealias GoodsCompletionHandler = (Goods?, Error?) -> Void
+typealias GoodsCompletionHandler = (GoodsBack?, Error?) -> Void
 
 protocol GoodsServiceProtocol {
-    func fetchGoodsList(completionHandler: GoodsCompletionHandler)
+    func fetchGoodsList(categoryId: Int, cityId: Int, completionHandler: GoodsCompletionHandler) -> Request
 }
 
 
