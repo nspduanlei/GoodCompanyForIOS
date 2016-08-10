@@ -33,7 +33,9 @@ class AddressCell: UITableViewCell {
         
         if let isDefault = address.isDefault {
             if isDefault {
-               deleteBtn.hidden = true
+                deleteBtn.hidden = true
+            } else {
+                deleteBtn.hidden = false
             }
         }
     }

@@ -45,10 +45,8 @@ class OrderDetailViewController: UITableViewController {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
-
-    
     
     //消息在表视图显示的时候发出，询问当前节中的行数
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

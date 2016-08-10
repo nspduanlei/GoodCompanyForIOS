@@ -23,6 +23,7 @@ class TrueViewController: UITableViewController {
         viewModel = TrueOrderViewModel()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.selectAddress), name: "selectAddress", object: nil)
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.loginMsgDeal), name: "loginMsg", object: nil)
         
         //消除多余的分割线
@@ -33,7 +34,6 @@ class TrueViewController: UITableViewController {
         self.trueGoodsReceipt = goodsReceipt
         tableView.reloadData()
     }
-    
     
     func selectAddress() {
         self.trueGoodsReceipt = selectGoodsReceipt
@@ -79,7 +79,6 @@ class TrueViewController: UITableViewController {
         if indexPath.row == 0 {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("trueOrderHeaderCell")! as! OrderHeaderCell
             
-        
             cell.initUi(self.trueGoodsReceipt!)
             
             return cell
@@ -163,7 +162,7 @@ class TrueViewController: UITableViewController {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
 
     override func didReceiveMemoryWarning() {
@@ -178,7 +177,6 @@ class TrueViewController: UITableViewController {
         print("test")
         close()
     }
-    
     
     //跳转传递参数
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -4,22 +4,24 @@ import ActionSheetPicker_3_0
 import SwiftyJSON
 
 var goodsReceipt: GoodsReceipt?
-
-class GoodsCViewController: UIViewController {
+class GoodsCViewController: UIViewController, AMapLocationManagerDelegate {
     
     @IBOutlet weak var topTitle: UIButton!
     @IBOutlet weak var locationBtn: UIBarButtonItem!
     
-    
-    var cityId: Int!
+    var cityId = 100
     var index1 = 0
     
     var countryArr: [String] = []
     var countryIDArr: [Int] = []
     
+    var json: JSON!
+    var locationManager: AMapLocationManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(netHex: 0x6c6c6c)
     
         //修改tabbar样式
         self.tabBarController?.tabBar.tintColor = Constants.COLOR_4
@@ -28,15 +30,22 @@ class GoodsCViewController: UIViewController {
         // 这个是必要的设置
         automaticallyAdjustsScrollViewInsets = false
         
-        let location = UserUtils.getLocation()
-        let locationName = UserUtils.getLocationName()
-        if location == nil || location == 0 {
-            cityId = 100
-            locationBtn.title = "深圳市"
-        } else {
-            cityId = location
-            locationBtn.title = locationName
-        }
+        initContent()
+        
+        //定义接收用户数据变化的通知
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GoodsCViewController.updateUser), name: "updateUser", object: nil)
+        
+        viewModel = GoodsCViewModel()
+        
+        updateUser()
+        //读取城市数据
+        initData()
+        
+        //是否定位
+        initLocation()
+    }
+    
+    func initContent() {
         
         var style = SegmentStyle()
         // 遮盖
@@ -50,31 +59,74 @@ class GoodsCViewController: UIViewController {
         style.selectedTitleColor = UIColor.init(netHex: 0x555555)
         
         style.titleMargin = 20
-    
+        
         style.scrollTitle = false
         
         let titles = setChildVcs().map { $0.title! }
-
+        
         let scroll = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.size.width, height: view.bounds.size.height - 64), segmentStyle: style, titles: titles, childVcs: setChildVcs(), parentViewController: self)
         view.addSubview(scroll)
-        
-        //定义接收用户数据变化的通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GoodsCViewController.updateUser), name: "updateUser", object: nil)
-        
-        viewModel = GoodsCViewModel()
-        
-        updateUser()
-        
-        initData()
     }
     
-    var json: JSON!
+    func initLocation() {
+        let location = UserUtils.getLocation()
+        let locationName = UserUtils.getLocationName()
+        
+        if location == nil || location == 0 {
+            startLocation()
+        } else {
+            cityId = location!
+            locationBtn.title = locationName
+        }
+    }
     
+    
+    func startLocation() {
+        AMapServices.sharedServices().apiKey = "aff3fe3ff60a6c0aae3fbed8ca502299"
+        locationManager = AMapLocationManager.init()
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.locationTimeout = 3
+        locationManager.reGeocodeTimeout = 3
+        
+        locationManager.requestLocationWithReGeocode(true) {
+            (location, regeocode, error) -> Void in
+            
+            if error != nil {
+                self.cityId = 100
+                self.locationBtn.title = "深圳市"
+                return
+            }
+            
+            //定位成功
+            for jsonObj in self.json.array! {
+                
+                let name = jsonObj["name"].string
+                let id = jsonObj["id"].int
+                let code = jsonObj["code"].string
+                
+                if code == regeocode.citycode {
+                    self.cityId = id!
+                    self.locationBtn.title = name
+                    
+                    ViewUtils.showMessage(self.view, message: "定位城市\(name)")
+                    
+                    UserUtils.setLocation(id!)
+                    UserUtils.setLocationName(name!)
+                    
+                    self.vc1?.cityId = id!
+                    self.vc1?.updateCity()
+                    self.vc2?.cityId = id!
+                    self.vc2?.updateCity()
+                }
+            }
+        }
+    }
+
     func initData () {
         let path = NSBundle.mainBundle().pathForResource("../address", ofType: "json")
         let jsonStr = NSData(contentsOfFile: path!)
         json = JSON(data: jsonStr!)
-
         
         for (i, jsonObj) in json.array!.enumerate() {
             let name = jsonObj["name"].string
@@ -91,8 +143,6 @@ class GoodsCViewController: UIViewController {
     }
     
     @IBAction func addressSelect(sender: AnyObject) {
-        
-        
         let picker = ActionSheetStringPicker(title: "选择城市", rows: countryArr, initialSelection: index1, doneBlock: {
             picker, values, indexs in
             
@@ -115,40 +165,11 @@ class GoodsCViewController: UIViewController {
                 
                 return
             }, origin: sender)
-        
-        //城市选择
-//        let picker = ActionSheetStringPicker.showPickerWithTitle("选择城市", rows: countryArr, initialSelection: index1, doneBlock: {
-//                picker, values, indexs in
-//            
-//                self.index1 = values
-//            
-//                UserUtils.setLocation(self.countryIDArr[values])
-//                UserUtils.setLocationName(self.countryArr[values])
-//            
-//                self.locationBtn.title = self.countryArr[values]
-//            
-//                //切换城市
-//                self.vc1?.cityId = self.countryIDArr[values]
-//                self.vc1?.updateCity()
-//                self.vc2?.cityId = self.countryIDArr[values]
-//                self.vc2?.updateCity()
-//            
-//                return
-//            }, cancelBlock: {
-//                block in
-//            
-//                return
-//            }, origin: sender)
-        
-        picker.tapDismissAction = TapAction.Success
-        
-        picker.setDoneButton(UIBarButtonItem(title: "确定", style: .Plain, target: nil, action: nil))
-        
-        picker.setCancelButton(UIBarButtonItem(title: "取消", style: .Plain, target: nil, action: nil))
-        
-        picker.showActionSheetPicker()
-        
     
+        picker.tapDismissAction = TapAction.Success
+        picker.setDoneButton(UIBarButtonItem(title: "确定", style: .Plain, target: nil, action: nil))
+        picker.setCancelButton(UIBarButtonItem(title: "取消", style: .Plain, target: nil, action: nil))
+        picker.showActionSheetPicker()
     }
     
     func updateUser() {
@@ -234,6 +255,7 @@ class GoodsCViewController: UIViewController {
         if goodsReceipt == nil {
             return
         }
+        NSNotificationCenter.defaultCenter().postNotificationName("loginMsg", object: nil)
         topTitle.setTitle("配送至:" + (goodsReceipt?.addrRes?.detail)!, forState: UIControlState.Normal)
     }
     
@@ -242,6 +264,6 @@ class GoodsCViewController: UIViewController {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
 }

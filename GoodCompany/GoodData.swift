@@ -20,12 +20,18 @@ class GoodData: Object {
 
     dynamic var isSelect = true
     
+    dynamic var isDelete = false
+    
     //商品数量
     dynamic var num = 0
     
 
     override static func primaryKey()-> String? {
         return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["isDelete"]
     }
     
 }

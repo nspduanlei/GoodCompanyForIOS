@@ -9,28 +9,31 @@
 import Foundation
 
 class ViewUtils {
-    
-    static var hub: MBProgressHUD!
 
     //显示加载中的提示
     static func showLoading(view: UIView) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        hub = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        //hub.label.text = "加载中"
+        let hub = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hub.label.text = "加载中"
+    }
+    
+    //显示加载中的提示
+    static func showLoading(view: UIView, msg: String) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let hub = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hub.label.text = msg
     }
     
     //隐藏加载中的提示
-    static func hideLoading() {
+    static func hideLoading(view: UIView) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        if hub == nil {
-            return
-        }
-        hub.hideAnimated(true)
+        
+        MBProgressHUD.hideHUDForView(view, animated: true)
     }
     
     //显示普通的文本提示
     static func showMessage(view: UIView, message: String) {
-        hub = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        let hub = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hub.mode = MBProgressHUDMode.Text
         hub.label.text = message
         hub.hideAnimated(true, afterDelay: 1)
@@ -58,4 +61,11 @@ class ViewUtils {
         let vc = sb.instantiateViewControllerWithIdentifier(id)
         view.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    static func popView(view: UIViewController) {
+        view.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
+    
 }

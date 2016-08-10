@@ -19,4 +19,7 @@ struct Constants {
     
     //主色橙色
     static let COLOR_4 = UIColor.init(netHex: 0xff8002)
+    
+    //最大购买数量
+    static let MAX_COUNT = 1000
 }

@@ -10,6 +10,8 @@ import Foundation
 
 class OrderViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var textHint: UILabel!
     //共计1件商品
     @IBOutlet weak var goodNum: UILabel!
     @IBOutlet weak var orderTime: UILabel!
@@ -70,6 +72,9 @@ class OrderViewCell: UITableViewCell {
             break;
         case 2:
             //提醒发货
+            
+            textHint.hidden = false
+            doBtn.hidden = true
             
             break;
         case 5:

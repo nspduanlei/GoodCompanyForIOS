@@ -21,6 +21,9 @@ class OrderViewController: UITableViewController {
         viewModel = OrdersViewModel()
         viewModel?.getOrders(stateId!)
         showLoading()
+        
+        //消除多余的分割线
+        tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,6 +114,6 @@ class OrderViewController: UITableViewController {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
 }

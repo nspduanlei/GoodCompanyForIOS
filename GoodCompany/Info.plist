@@ -24,9 +24,25 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>jpush.cn</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>本应用将要使用您的定位信息，否则可能无法提供相关服务</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

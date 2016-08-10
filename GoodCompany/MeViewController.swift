@@ -20,6 +20,8 @@ class MeViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(netHex: 0x6c6c6c)
 
         //定义接收用户数据变化的通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeViewController.updateUser), name: "updateUser", object: nil)
@@ -40,9 +42,7 @@ class MeViewController: UITableViewController {
             
             if let dataImage = UserUtils.getImage() {
                 let imageN = UIImage(data: dataImage)
-                
                 userHeader.image = imageN
-                
             } else {
                 userHeader.image = UIImage(named:"default_header")
             }

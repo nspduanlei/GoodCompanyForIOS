@@ -112,18 +112,60 @@ class GoodsTableViewCell: UITableViewCell {
             inputBtn.setTitle("\(num)", forState: UIControlState.Normal)
             goodDao.updateNum(goodData, num: num)
         }
-        
         updateView()
-        
     }
     
     @IBAction func onAddClicked(sender: AnyObject) {
         var num = Int(inputBtn.currentTitle!)!
+        if num == Constants.MAX_COUNT {
+            ViewUtils.showMessage(context.view, message: "购买数量不能超过\(Constants.MAX_COUNT)")
+            return
+        }
+        
         num = num+1
         inputBtn.setTitle("\(num)", forState: UIControlState.Normal)
-        
         goodDao.updateNum(goodData, num: num)
-        
         updateView()
     }
+    
+    @IBAction func onCountClicked(sender: AnyObject) {
+        let alertController = UIAlertController(title: "修改购买数量", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addTextFieldWithConfigurationHandler {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "购买数量"
+            textField.keyboardType = UIKeyboardType.NumberPad
+            textField.text = self.inputBtn.currentTitle!
+            textField.addTarget(self, action:#selector(self.textFieldChanged), forControlEvents:UIControlEvents.EditingChanged)
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
+        let okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.Default) {
+            (action: UIAlertAction!) -> Void in
+            
+            let countBtn = (alertController.textFields?.first)! as UITextField
+            
+            let num = Int(countBtn.text!)
+            
+            self.goodDao.updateNum(self.goodData, num: num!)
+            self.updateView()
+        }
+    
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        context.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func textFieldChanged(textField: UITextField) {
+        let num = Int(textField.text!)
+        if num > Constants.MAX_COUNT {
+            textField.text = "\(Constants.MAX_COUNT)"
+            ViewUtils.showMessage(context.view, message: "购买数量不能超过\(Constants.MAX_COUNT)")
+        } else if num == 0 {
+            textField.text = "1"
+        }
+    }
+    
+    
 }

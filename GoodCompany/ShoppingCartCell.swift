@@ -23,17 +23,17 @@ class ShoppingCartCell: UITableViewCell {
     
     @IBOutlet weak var inputBg: UIView!
     
-    //let stepper = SnappingStepper(frame: CGRect(x: 246, y: 78, width: 97, height: 31))
-    
+    var isEdit = false
     var goodData: GoodData!
     var goodDao: GoodDao!
     var context: UIViewController!
     
-    func initUi(goodData: GoodData, context: UIViewController) {
+    func initUi(goodData: GoodData, context: UIViewController, isEdit: Bool) {
         
         self.goodData = goodData
         self.goodDao = GoodDao()
         self.context = context
+        self.isEdit = isEdit
         
         price.text = "¥" + goodData.price
         goodName.text = goodData.skuName
@@ -42,19 +42,31 @@ class ShoppingCartCell: UITableViewCell {
         let num = goodData.num
         inputBtn.setTitle("\(num)", forState: UIControlState.Normal)
         
-        isSelect.selected = goodData.isSelect
+        if isEdit {
+            isSelect.selected = goodData.isDelete
+        } else {
+            isSelect.selected = goodData.isSelect
+        }
         
         if goodData.pic != "" {
             goodImage.kf_setImageWithURL(NSURL(string: goodData.pic)!)
         }
     }
-
     
     @IBAction func onCheckClicked(sender: AnyObject) {
-        if isSelect.selected {
-            goodDao.updateSelect(goodData, isSelect: false)
+        if isEdit {
+            let goodsView  = context as! ShoppingCartViewController
+            if isSelect.selected {
+                goodsView.selectForEdit(goodData.id, isSelect: false)
+            } else {
+                goodsView.selectForEdit(goodData.id, isSelect: true)
+            }
         } else {
-            goodDao.updateSelect(goodData, isSelect: true)
+            if isSelect.selected {
+                goodDao.updateSelect(goodData, isSelect: false)
+            } else {
+                goodDao.updateSelect(goodData, isSelect: true)
+            }
         }
         update()
     }
@@ -76,6 +88,12 @@ class ShoppingCartCell: UITableViewCell {
 
     @IBAction func onAddClicked(sender: AnyObject) {
         var num = Int(inputBtn.currentTitle!)!
+        
+        if num == Constants.MAX_COUNT {
+            ViewUtils.showMessage(context.view, message: "购买数量不能超过\(Constants.MAX_COUNT)")
+            return
+        }
+        
         num = num+1
         inputBtn.setTitle("\(num)", forState: UIControlState.Normal)
         goodDao.updateNum(goodData, num: num)
@@ -89,8 +107,49 @@ class ShoppingCartCell: UITableViewCell {
     
     func  update() {
         let goodsView  = context as! ShoppingCartViewController
-        goodsView.updateData()
+        goodsView.reloadData()
     }
+    
+    @IBAction func onCountClicked(sender: AnyObject) {
+        
+        let alertController = UIAlertController(title: "修改购买数量", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addTextFieldWithConfigurationHandler {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "购买数量"
+            textField.keyboardType = UIKeyboardType.NumberPad
+            textField.text = self.inputBtn.currentTitle!
+            textField.addTarget(self, action:#selector(self.textFieldChanged), forControlEvents:UIControlEvents.EditingChanged)
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
+        let okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.Default) {
+            (action: UIAlertAction!) -> Void in
+            
+            let countBtn = (alertController.textFields?.first)! as UITextField
+            
+            let num = Int(countBtn.text!)
+            
+            self.goodDao.updateNum(self.goodData, num: num!)
+            self.updateView()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        context.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func textFieldChanged(textField: UITextField) {
+        let num = Int(textField.text!)
+        if num > Constants.MAX_COUNT {
+            textField.text = "\(Constants.MAX_COUNT)"
+            ViewUtils.showMessage(context.view, message: "购买数量不能超过\(Constants.MAX_COUNT)")
+        } else if num == 0 {
+            textField.text = "1"
+        }
+    }
+
 }
 
 

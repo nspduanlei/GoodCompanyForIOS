@@ -60,6 +60,9 @@
 		BD5D23411CCF692800FAC84A /* GoodsCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D23401CCF692800FAC84A /* GoodsCViewModel.swift */; };
 		BD5D23431CCF6B9800FAC84A /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D23421CCF6B9800FAC84A /* Observable.swift */; };
 		BD6343231CDB502B004C18F8 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6343221CDB502B004C18F8 /* GuideViewController.swift */; };
+		BD64B72A1D54276300CB1274 /* UpdateUserP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64B7291D54276300CB1274 /* UpdateUserP.swift */; };
+		BD64B72C1D54276F00CB1274 /* UpdateUserS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64B72B1D54276F00CB1274 /* UpdateUserS.swift */; };
+		BD64B72E1D54278B00CB1274 /* UpdateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64B72D1D54278B00CB1274 /* UpdateUserViewModel.swift */; };
 		BD66788A1CFD35E7005BB998 /* UserUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6678891CFD35E7005BB998 /* UserUtils.swift */; };
 		BD66788C1CFD3DDE005BB998 /* HttpHeadersUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66788B1CFD3DDE005BB998 /* HttpHeadersUtils.swift */; };
 		BD66788E1CFD6C0D005BB998 /* ChildViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66788D1CFD6C0D005BB998 /* ChildViewControllerDelegate.swift */; };
@@ -111,6 +114,8 @@
 		BD8150D51D1B84C50069A3ED /* Pic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8150D41D1B84C50069A3ED /* Pic.swift */; };
 		BD8150D71D1B85790069A3ED /* Goods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8150D61D1B85790069A3ED /* Goods.swift */; };
 		BD8150DA1D1CE63A0069A3ED /* GoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8150D91D1CE63A0069A3ED /* GoodsTableViewCell.swift */; };
+		BD81A17D1D596E5500513494 /* lib in Resources */ = {isa = PBXBuildFile; fileRef = BD81A17C1D596E5500513494 /* lib */; };
+		BD81A17F1D59756400513494 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81A17E1D59756400513494 /* jpush-ios-2.1.8.a */; };
 		BD8255EC1D0119DF00E133E4 /* AddressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8255EB1D0119DF00E133E4 /* AddressDetailViewController.swift */; };
 		BD8255F21D016A8000E133E4 /* GoodsCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8255F11D016A8000E133E4 /* GoodsCViewController.swift */; };
 		BD8255F81D016AEB00E133E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8255F41D016AEB00E133E4 /* ContentView.swift */; };
@@ -231,6 +236,9 @@
 		BD5D23401CCF692800FAC84A /* GoodsCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCViewModel.swift; sourceTree = "<group>"; };
 		BD5D23421CCF6B9800FAC84A /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		BD6343221CDB502B004C18F8 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		BD64B7291D54276300CB1274 /* UpdateUserP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserP.swift; sourceTree = "<group>"; };
+		BD64B72B1D54276F00CB1274 /* UpdateUserS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserS.swift; sourceTree = "<group>"; };
+		BD64B72D1D54278B00CB1274 /* UpdateUserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserViewModel.swift; sourceTree = "<group>"; };
 		BD6678891CFD35E7005BB998 /* UserUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUtils.swift; sourceTree = "<group>"; };
 		BD66788B1CFD3DDE005BB998 /* HttpHeadersUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeadersUtils.swift; sourceTree = "<group>"; };
 		BD66788D1CFD6C0D005BB998 /* ChildViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -284,6 +292,8 @@
 		BD8150D41D1B84C50069A3ED /* Pic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pic.swift; sourceTree = "<group>"; };
 		BD8150D61D1B85790069A3ED /* Goods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goods.swift; sourceTree = "<group>"; };
 		BD8150D91D1CE63A0069A3ED /* GoodsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsTableViewCell.swift; sourceTree = "<group>"; };
+		BD81A17C1D596E5500513494 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
+		BD81A17E1D59756400513494 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-2.1.8.a"; path = "lib/jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
 		BD8255EB1D0119DF00E133E4 /* AddressDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressDetailViewController.swift; sourceTree = "<group>"; };
 		BD8255F11D016A8000E133E4 /* GoodsCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCViewController.swift; sourceTree = "<group>"; };
 		BD8255F41D016AEB00E133E4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ScrollPageView/ContentView.swift; sourceTree = "<group>"; };
@@ -332,6 +342,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD81A17F1D59756400513494 /* jpush-ios-2.1.8.a in Frameworks */,
 				1493A3BA21068D34FEAAAF84 /* Pods_GoodCompany.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +376,7 @@
 		9B96A5AB19E4C553242BA0CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD81A17E1D59756400513494 /* jpush-ios-2.1.8.a */,
 				F288AE60A7BEA4D897832D70 /* Pods_GoodCompany.framework */,
 			);
 			name = Frameworks;
@@ -373,6 +385,7 @@
 		BD06F1AB1CBCF25B00EBA7F6 = {
 			isa = PBXGroup;
 			children = (
+				BD81A17C1D596E5500513494 /* lib */,
 				BD06F1B61CBCF25B00EBA7F6 /* GoodCompany */,
 				BD06F1CE1CBCF25B00EBA7F6 /* GoodCompanyTests */,
 				BD06F1D91CBCF25B00EBA7F6 /* GoodCompanyUITests */,
@@ -563,6 +576,7 @@
 				BD1F19E11D3F5F5800610959 /* OrdersViewModel.swift */,
 				BD3DEDCD1D45EB0D00DFA085 /* OrderDetailViewModel.swift */,
 				BD6D2DF01D47442F00823E05 /* LogDetailViewModel.swift */,
+				BD64B72D1D54278B00CB1274 /* UpdateUserViewModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -592,6 +606,8 @@
 				BD6D2DE81D47417900823E05 /* LogDetailS.swift */,
 				BD6D2DF41D474F4F00823E05 /* CancelOrderP.swift */,
 				BD6D2DF61D474F6000823E05 /* CancelOrderS.swift */,
+				BD64B7291D54276300CB1274 /* UpdateUserP.swift */,
+				BD64B72B1D54276F00CB1274 /* UpdateUserS.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -825,6 +841,11 @@
 					BD06F1B31CBCF25B00EBA7F6 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = ARJ7Z2B55N;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					BD06F1CA1CBCF25B00EBA7F6 = {
 						CreatedOnToolsVersion = 7.3;
@@ -864,6 +885,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD06F1C51CBCF25B00EBA7F6 /* LaunchScreen.storyboard in Resources */,
+				BD81A17D1D596E5500513494 /* lib in Resources */,
 				BD06F1C21CBCF25B00EBA7F6 /* Assets.xcassets in Resources */,
 				BD9F07841D37957C00EE690C /* address.json in Resources */,
 				BD06F1BD1CBCF25B00EBA7F6 /* Main.storyboard in Resources */,
@@ -976,10 +998,12 @@
 				BD58A9811D26126A00A4C46E /* ShapeStyle.swift in Sources */,
 				BDE776B01D34D82A00D59861 /* SelAddressP.swift in Sources */,
 				BD06F1F11CBCF7C900EBA7F6 /* GoodsServiceProtocol.swift in Sources */,
+				BD64B72C1D54276F00CB1274 /* UpdateUserS.swift in Sources */,
 				BD3DEDD01D45ED9700DFA085 /* OrderDetailHeaderCell.swift in Sources */,
 				BDE776A91D34885600D59861 /* AddressPost.swift in Sources */,
 				BD3DEDCE1D45EB0D00DFA085 /* OrderDetailViewModel.swift in Sources */,
 				BD7070431D4075B8001FB15D /* OrderHeaderCell.swift in Sources */,
+				BD64B72E1D54278B00CB1274 /* UpdateUserViewModel.swift in Sources */,
 				BD7782AB1CFC15B500F2DA5D /* User.swift in Sources */,
 				BD8255FA1D016AEB00E133E4 /* ScrollSegmentView.swift in Sources */,
 				BDFFC0861D2DE85100E72013 /* Address.swift in Sources */,
@@ -1023,6 +1047,7 @@
 				BD58A9801D26126A00A4C46E /* CustomShapeLayer.swift in Sources */,
 				BDCF02041D2A120A00538FCC /* GoodData.swift in Sources */,
 				BD015C3E1D2D129C00D6AF1A /* GoodsViewModel.swift in Sources */,
+				BD64B72A1D54276300CB1274 /* UpdateUserP.swift in Sources */,
 				BD58A97F1D26126A00A4C46E /* AutoRepeatHelper.swift in Sources */,
 				BD7E49E31CF43BC1009C1620 /* SectionHeaderCollectionReusableView.swift in Sources */,
 				BD58A9861D26126A00A4C46E /* UIBuilder.swift in Sources */,
@@ -1219,14 +1244,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bin Lan (F82299D873)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = GoodCompany/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apec.hhj;
 				PRODUCT_NAME = "好伙计";
 				PROVISIONING_PROFILE = "e4ee4e68-64e0-487d-9aa9-03aae2ba86bd";
@@ -1250,6 +1278,10 @@
 				);
 				INFOPLIST_FILE = GoodCompany/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apec.hhj;
 				PRODUCT_NAME = "好伙计";
 				PROVISIONING_PROFILE = "e4ee4e68-64e0-487d-9aa9-03aae2ba86bd";

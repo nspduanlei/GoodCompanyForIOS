@@ -10,4 +10,6 @@ target 'GoodCompany' do
     pod 'AlamofireObjectMapper', '~> 3.0'
     pod 'DynamicColor', '~> 2.4'
     pod 'RealmSwift'
+    pod 'AMapLocation'
+    pod 'UMengAnalytics-NO-IDFA'
 end

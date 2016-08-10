@@ -107,15 +107,15 @@ class LoginViewController: UITableViewController {
         didSet {
             viewModel?.loginBack.observe {
                 [weak self] in
-                ViewUtils.hideLoading()
+                ViewUtils.hideLoading((self?.view)!)
                 
                 if $0.h?.code == 200 {
                     ViewUtils.showMessage((self?.view)!, message: "登录成功")
                     UserUtils.setUserInfo($0.user!)
                     //发送通知
                     NSNotificationCenter.defaultCenter().postNotificationName("updateUser", object: nil)
-                    
                     NSNotificationCenter.defaultCenter().postNotificationName("loginMsg", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("getData", object: nil)
                     
                     self?.showData($0.user!)
                     
@@ -192,7 +192,7 @@ class LoginViewController: UITableViewController {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
 
     override func didReceiveMemoryWarning() {

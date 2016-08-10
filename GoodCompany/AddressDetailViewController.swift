@@ -15,7 +15,7 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
     @IBOutlet weak var receivedName: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var cityAndArea: UILabel!
-    @IBOutlet weak var detailAddress: UITextField!
+    @IBOutlet weak var detailAddress: UITextView!
     
     var cityId: Int!
     var areaId: Int!
@@ -47,7 +47,6 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
         }
         
         initData()
-        
         viewModel = AddressEditViewModel()
     }
     
@@ -67,19 +66,15 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
                 switch $0 {
                 case 1:
                     self?.showHint("编辑地址成功")
-                    
                     //发送通知
                     NSNotificationCenter.defaultCenter().postNotificationName("updateAddress", object: 0)
-                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateUser", object: nil)
                     self?.navigationController?.popViewControllerAnimated(true)
-                    
                     break;
                 case 2:
                     self?.showHint("添加地址成功")
-                    
                     //发送通知
                     NSNotificationCenter.defaultCenter().postNotificationName("updateAddress", object: 0)
-                    
                     self?.navigationController?.popViewControllerAnimated(true)
                     break;
                 default:
@@ -98,13 +93,12 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
         super.didReceiveMemoryWarning()
     }
     
-    
     func showLoading() {
         ViewUtils.showLoading(view)
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
     
     @IBAction func onSaveClicked(sender: AnyObject) {
@@ -157,11 +151,8 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
             picker.tapDismissAction = TapAction.Success
             
             picker.setDoneButton(UIBarButtonItem(title: "确定", style: .Plain, target: nil, action: nil))
-            
             picker.setCancelButton(UIBarButtonItem(title: "取消", style: .Plain, target: nil, action: nil))
-            
             picker.showActionSheetPicker()
-            
             view.endEditing(true)
         }
     }
@@ -173,15 +164,11 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
             self.index2 = 0
             
             calculateFirstData()
-            
             pickerView.reloadComponent(1)
-    
             pickerView.selectRow(0, inComponent: 1, animated: true)
             
             break
-            
         case 1:
-            
             self.index2 = row
             break
             
@@ -234,28 +221,32 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
     
     func calculateFirstData() {
         districtArr = []
+        districtIDArr = []
         for jsonObj in json.array![index1]["area"].array! {
             let name = jsonObj["name"].string
             let id = jsonObj["id"].int
-            
+        
             districtIDArr.append(id!)
             districtArr.append(name!)
         }
-        
     }
     
     func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
-        print("test")
         
         cityId = countryIDArr[index1]
         areaId = districtIDArr[index2]
+        
+        print("list--\(districtIDArr)")
+        
+        print("selectCityId-----\(cityId)")
+        print("selectAreaId-----\(areaId)")
         
         cityAndArea.text = countryArr[index1] + districtArr[index2]
         
     }
     
     func actionSheetPickerDidCancel(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
-        print("test")
+
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -274,7 +265,6 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
         default:
             break
         }
-        
         return 0
     }
     
@@ -288,7 +278,6 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
         default:
             break
         }
-        
         return nil
     }
     
@@ -301,7 +290,6 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
         
         if label == nil {
             label = UILabel.init()
-            
             label?.font = UIFont(name: "system", size: 14)
         }
         
@@ -323,7 +311,6 @@ class AddressDetailViewController: UITableViewController, ControllerProtocol, Ac
         label?.text = title
         
         return label!
-        
     }
 
 }

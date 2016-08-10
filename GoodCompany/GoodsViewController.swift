@@ -37,6 +37,9 @@ class GoodsViewController: UITableViewController, ControllerProtocol, CirCleView
         self.refreshControl = rc
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GoodsViewController.updateGoods), name: "updateGoodsNew", object: nil)
+        
+        //消除多余的分割线
+        tableView.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,7 +71,7 @@ class GoodsViewController: UITableViewController, ControllerProtocol, CirCleView
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
     
     //下拉刷新

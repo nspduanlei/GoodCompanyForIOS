@@ -55,6 +55,10 @@ class GoodDao {
         }
     }
     
+    func deleteSelect(goods: [GoodData]) {
+        deleteList(goods)
+    }
+    
     //更新商品数量
     func updateNum(good: GoodData, num: Int) {
         try! realm.write {

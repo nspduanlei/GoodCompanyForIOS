@@ -121,7 +121,7 @@ class SelectCityViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
 
     func selectCity(id: Int) {

@@ -21,7 +21,6 @@ class SettingViewController: UITableViewController {
         } else {
             loginOutBtn.hidden = true
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +31,8 @@ class SettingViewController: UITableViewController {
         loginOutBtn.hidden = true
         UserUtils.clear()
         //清空购物车
-        GoodDao().deleteAll()
+//        GoodDao().deleteAll()
+//        ViewUtils.setShoppingCartNum(self, num: 0)
         
         //发送通知
         NSNotificationCenter.defaultCenter().postNotificationName("updateUser", object: 0)

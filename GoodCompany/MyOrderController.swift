@@ -23,6 +23,24 @@ class MyOrderController: UIViewController {
         // 这个是必要的设置
         automaticallyAdjustsScrollViewInsets = false
         
+        //如果没有登录，跳转到登录
+        if UserUtils.getToken() == nil {
+            let sb = UIStoryboard(name:"Main", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("login")
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        initContent()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyOrderController.updateOrder), name: "orderUpdate", object: nil)
+        //获取数据
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getData), name: "getData", object: nil)
+    }
+    
+    func getData() {
+        updateOrder()
+    }
+    
+    func initContent() {
         var style = SegmentStyle()
         // 遮盖
         style.showCover = true
@@ -40,12 +58,8 @@ class MyOrderController: UIViewController {
         let titles = setChildVcs().map { $0.title! }
         
         let scroll = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.size.width, height: view.bounds.size.height - 64), segmentStyle: style, titles: titles, childVcs: setChildVcs(), parentViewController: self)
-    
         
         view.addSubview(scroll)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MyOrderController.updateOrder), name: "orderUpdate", object: nil)
-
     }
     
     func updateOrder() {
@@ -90,7 +104,13 @@ class MyOrderController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    func close() {
+        self.navigationController?.popViewControllerAnimated(false)
+    }
     
+    @IBAction func close(segue: UIStoryboardSegue) {
+        close()
+    }
     
 }
 

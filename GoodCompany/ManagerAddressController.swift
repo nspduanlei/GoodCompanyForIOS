@@ -29,21 +29,25 @@ class ManagerAddressController: UIViewController, UITableViewDataSource {
             let vc = sb.instantiateViewControllerWithIdentifier("login")
             self.presentViewController(vc, animated: true, completion: nil)
         } else {
-            //获取数据
+            getData()
         }
-    
-        viewModel = AddressListViewModel()
-        getList()
         
         //定义接收用户数据变化的通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUser), name: "updateUser", object: nil)
         //定义接收用户数据变化的通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getList), name: "updateAddress", object: nil)
+        
+        //获取数据
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getData), name: "getData", object: nil)
+    }
+    
+    func getData() {
+        viewModel = AddressListViewModel()
+        getList()
     }
     
     var viewModel: AddressListViewModel? {
         didSet {
-            
             viewModel?.data?.observe {
                 [weak self] in
                 self?.addressList = $0.b
@@ -65,6 +69,7 @@ class ManagerAddressController: UIViewController, UITableViewDataSource {
                 switch $0 {
                 case 1:
                     self?.showHint("设置默认地址成功")
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateUser", object: nil)
                     self?.getList()
                     break;
                 case 2:
@@ -137,7 +142,7 @@ class ManagerAddressController: UIViewController, UITableViewDataSource {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
     
     func showHint(msg:String) {

@@ -25,7 +25,6 @@ class MyAccountController: UITableViewController, UIImagePickerControllerDelegat
         self.tabBarController?.tabBar.translucent = false
         //消除多余的分割线
         tableView.tableFooterView = UIView()
-    
     }
     
     override func viewDidAppear(animated: Bool) {

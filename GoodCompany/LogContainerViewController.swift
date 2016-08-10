@@ -15,7 +15,6 @@ class LogContainerViewController: UIViewController {
     var list: [TransportItem]?
     
     override func viewDidLoad() {
- 
         viewModel = LogDetailViewModel()
         viewModel?.getLogDetail(orderId!)
         showLoading()
@@ -26,9 +25,7 @@ class LogContainerViewController: UIViewController {
             viewModel?.back?.observe {
                 [weak self] in
                 self?.list = $0.list!
-                
                 self?.initView()
-                
                 self?.hideLoading()
             }
             
@@ -47,7 +44,7 @@ class LogContainerViewController: UIViewController {
     }
     
     func hideLoading() {
-        ViewUtils.hideLoading()
+        ViewUtils.hideLoading(view)
     }
 
     

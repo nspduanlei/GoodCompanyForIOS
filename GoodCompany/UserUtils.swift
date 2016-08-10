@@ -39,6 +39,7 @@ class UserUtils {
         let shopName = defaults.stringForKey(SHOP_NAME_KEY)
 
         let user = User()
+        user.id = id
         user.name = name
         user.phone = phone
         user.shopName = shopName
